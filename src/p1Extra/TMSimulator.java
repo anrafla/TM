@@ -26,13 +26,15 @@ public class TMSimulator {
 			for (int i = 0; i < Integer.parseInt(numOfStates); i++) {
 				for (int j = 0; j <= Integer.parseInt(numOfSymbols); j++) {
 					StringTokenizer tk = new StringTokenizer(scan.nextLine(), ",");
-					Transition trans = new Transition();
 					String nextState = tk.nextToken();
 					String writeSymbol = tk.nextToken();
 					String direction = tk.nextToken();
-					
+					tm.addTransition(new Transition(Integer.toString(i), Character.forDigit(j, 10), nextState,
+							writeSymbol.charAt(0), direction.charAt(0)));
 				}
 			}
+			String input = scan.next().trim();
+//			tm.simulate(input);
 		}
 	}
 

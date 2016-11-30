@@ -5,11 +5,9 @@ import java.util.Set;
 
 public class TMState {
 	private String name;
-	private Set<Transition> delta;
 
 	public TMState(String name) {
 		this.name = name;
-		delta = new HashSet<Transition>();
 	}
 
 //	public void addTransition(TMState fromState, TMState nextState, int writeSymbol, char direction) {

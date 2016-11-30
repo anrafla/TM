@@ -2,6 +2,7 @@ package p1Extra;
 
 import java.util.List;
 import java.util.HashSet;
+import java.util.LinkedHashSet;
 import java.util.LinkedList;
 import java.util.Set;
 
@@ -9,7 +10,7 @@ public class TM {
 
 	private Set<TMState> states;
 	private Set<Integer> alphabet;
-	private Set<Transition> delta;
+	public Set<Transition> delta;
 
 	private TMState startState, haltingState;
 	private List<Integer> tape;
@@ -20,7 +21,7 @@ public class TM {
 	public TM() {
 		states = new HashSet<TMState>();
 		alphabet = new HashSet<Integer>();
-		delta = new HashSet<Transition>();
+		delta = new LinkedHashSet<Transition>();
 		tape = new LinkedList<Integer>();
 	}
 
@@ -36,6 +37,10 @@ public class TM {
 		states.add(state);
 	}
 
+	public void addTransition(Transition trans){
+		delta.add(trans);
+	}
+	
 	public String toString() {
 		return states.toString();
 	}
