@@ -12,9 +12,9 @@ public class TMState {
 		delta = new HashSet<Transition>();
 	}
 
-	public void addTransition(TMState fromState, TMState nextState, int writeSymbol, char direction) {
-		delta.add(new Transition(fromState, nextState, writeSymbol, direction));
-	}
+//	public void addTransition(TMState fromState, TMState nextState, int writeSymbol, char direction) {
+//		delta.add(new Transition(fromState, nextState, writeSymbol, direction));
+//	}
 
 	public String toString() {
 		return name;

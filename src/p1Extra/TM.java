@@ -9,6 +9,8 @@ public class TM {
 
 	private Set<TMState> states;
 	private Set<Integer> alphabet;
+	private Set<Transition> delta;
+
 	private TMState startState, haltingState;
 	private List<Integer> tape;
 
@@ -18,6 +20,7 @@ public class TM {
 	public TM() {
 		states = new HashSet<TMState>();
 		alphabet = new HashSet<Integer>();
+		delta = new HashSet<Transition>();
 		tape = new LinkedList<Integer>();
 	}
 
@@ -36,4 +39,5 @@ public class TM {
 	public String toString() {
 		return states.toString();
 	}
+
 }

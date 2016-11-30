@@ -18,7 +18,7 @@ public class Transition {
 	 * @param nextState
 	 *            nextState
 	 */
-	public Transition(TMState fromState, TMState nextState, int writeSymbol, char direction) {
+	public Transition(String fromState, char onSymb, String nextState, String writeSymbol, char direction) {
 		this.nextState = nextState;
 		this.writeSymbol = writeSymbol;
 		this.direction = direction;
