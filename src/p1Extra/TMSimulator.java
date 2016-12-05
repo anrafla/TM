@@ -34,7 +34,7 @@ public class TMSimulator {
 				}
 			}
 			String input = scan.next().trim();
-//			tm.simulate(input);
+			tm.simulate(input);
 		}
 	}
 

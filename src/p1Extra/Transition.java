@@ -27,7 +27,7 @@ public class Transition {
 
 	public String toString() {
 		String str = "From State: " + fromState + "\nOn: " + onSymb + "\nGoes to: " + nextState + "\nWrites: "
-				+ writeSymbol + "\nGoes: " + direction + "!!!!!!!";
+				+ writeSymbol + "\nGoes: " + direction;
 		return str;
 
 	}

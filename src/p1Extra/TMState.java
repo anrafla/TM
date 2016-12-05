@@ -10,6 +10,9 @@ public class TMState {
 		this.name = name;
 	}
 
+	public String getName(){
+		return name;
+	}
 //	public void addTransition(TMState fromState, TMState nextState, int writeSymbol, char direction) {
 //		delta.add(new Transition(fromState, nextState, writeSymbol, direction));
 //	}
