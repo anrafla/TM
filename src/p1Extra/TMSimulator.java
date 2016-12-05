@@ -28,11 +28,14 @@ public class TMSimulator {
 					String nextState = tk.nextToken();
 					String writeSymbol = tk.nextToken();
 					String direction = tk.nextToken();
-					tm.addTransition(Integer.toString(i),Character.forDigit(j, 10), nextState,
-							writeSymbol.charAt(0), direction.charAt(0));
+					tm.addTransition(Integer.toString(i), Character.forDigit(j, 10), nextState, writeSymbol.charAt(0),
+							direction.charAt(0));
 				}
 			}
-			String input = scan.next().trim();
+			String input = "";
+			if (scan.hasNext()) {
+				input = scan.next().trim();
+			}
 			System.out.println(tm.simulate(input));
 		}
 	}
