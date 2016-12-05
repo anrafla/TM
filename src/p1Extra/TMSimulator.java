@@ -16,25 +16,24 @@ public class TMSimulator {
 			Scanner scan = new Scanner(file);
 			String numOfStates = scan.nextLine();
 			String numOfSymbols = scan.nextLine();
-			tm.addStartState(new TMState("0"));
+			tm.addStartState("0");
 			for (int i = 1; i < Integer.parseInt(numOfStates); i++) {
 				Integer name = new Integer(i);
-				TMState state = new TMState(name.toString());
-				tm.addState(state);
+				tm.addState(name.toString());
 			}
-			tm.addHaltingState(new TMState(numOfStates));
+			tm.addHaltingState(numOfStates);
 			for (int i = 0; i < Integer.parseInt(numOfStates); i++) {
 				for (int j = 0; j <= Integer.parseInt(numOfSymbols); j++) {
 					StringTokenizer tk = new StringTokenizer(scan.nextLine(), ",");
 					String nextState = tk.nextToken();
 					String writeSymbol = tk.nextToken();
 					String direction = tk.nextToken();
-					tm.addTransition(new Transition(Integer.toString(i), Character.forDigit(j, 10), nextState,
-							writeSymbol.charAt(0), direction.charAt(0)));
+					tm.addTransition(Integer.toString(i),Character.forDigit(j, 10), nextState,
+							writeSymbol.charAt(0), direction.charAt(0));
 				}
 			}
 			String input = scan.next().trim();
-			tm.simulate(input);
+			System.out.println(tm.simulate(input));
 		}
 	}
 

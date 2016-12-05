@@ -6,7 +6,7 @@ package p1Extra;
  *
  */
 public class Transition {
-	private String fromState, nextState;
+	private TMState nextState;
 	private char direction, onSymb, writeSymbol;
 
 	/**
@@ -17,16 +17,27 @@ public class Transition {
 	 * @param nextState
 	 *            nextState
 	 */
-	public Transition(String fromState, char onSymb, String nextState, char writeSymbol, char direction) {
-		this.fromState = fromState;
+	public Transition(char onSymb, TMState nextState, char writeSymbol, char direction) {
 		this.nextState = nextState;
 		this.writeSymbol = writeSymbol;
 		this.direction = direction;
 		this.onSymb = onSymb;
 	}
-
+	public char getOnSymb(){
+		return onSymb;
+	}
+	public TMState getNextState(){
+		return nextState;
+	}
+	public char getWriteSymbol(){
+		return writeSymbol;
+	}
+	public char getDirection(){
+		return direction;
+	}
+	
 	public String toString() {
-		String str = "From State: " + fromState + "\nOn: " + onSymb + "\nGoes to: " + nextState + "\nWrites: "
+		String str = "\nOn: " + onSymb + "\nGoes to: " + nextState + "\nWrites: "
 				+ writeSymbol + "\nGoes: " + direction;
 		return str;
 
