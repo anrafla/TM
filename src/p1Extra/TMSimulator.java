@@ -34,10 +34,7 @@ public class TMSimulator {
 			}
 			String input = "";
 			if (scan.hasNext()) {
-				input = scan.next().trim();
-				if(input.contentEquals("EOF")){
-					input = "";
-				}
+				input = scan.nextLine().trim();
 			}
 			System.out.println(tm.simulate(input));
 		} else {
