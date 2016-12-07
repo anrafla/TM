@@ -25,62 +25,66 @@ public class TM {
 
 	public String simulate(String input) {
 		initTape(input);
-		ListIterator<Cell> iter = tape.listIterator();
+		int tapeIndex = 0;
 		Cell curr = tape.getFirst();
 		curr.setVisited();
 		TMState currState = startState;
-		//while the TM is running, i.e, when it is not in a halting state
-		while(!currState.getName().equals(haltingState.getName())){
+		boolean printOnlyVisited = (input == "");
+		// while the TM is running, i.e, when it is not in a halting state
+		while (!currState.getName().equals(haltingState.getName())) {
 			Transition temp = currState.getTransitionOn(curr.read());
-			//update which state it is in
+			// update which state it is in
 			currState = temp.getNextState();
-			//update the tape, and mark cell as visited, then update the list
+			// update the tape, and mark cell as visited, then update the list
 			curr.write(temp.getWriteSymbol());
-//			iter.set(curr);
-			//moving the tape pointer
-//			System.out.println(temp.getDirection());
-			curr.setVisited();
-			if(temp.getDirection() == 'R'){
-				//making sure we dont go out of index exception: tape is bi-infinite
-				if(iter.hasNext()){
-					curr = iter.next();
-				}else{
-					curr = new Cell('0' ,true);
-					tape.addLast(curr);
-					iter = tape.listIterator(tape.indexOf(curr));
-				}
-			}else{
-				if(iter.hasPrevious()){
-					curr = iter.previous();
-				}else{
-					curr = new Cell('0', true);
+			if (temp.getDirection() == 'R') {
+				// making sure we dont go out of index exception: tape is
+				// bi-infinite
+				if (tapeIndex < tape.size() - 1) {
+					curr = tape.get(++tapeIndex);
 					curr.setVisited();
-					tape.addFirst(curr);
-					iter = tape.listIterator(tape.indexOf(curr));
+				} else {
+					curr = new Cell('0', true);
+					tape.addLast(curr);
+					tapeIndex++;
 				}
-				
+			} else {
+				if (tapeIndex > 0) {
+					curr = tape.get(--tapeIndex);
+					curr.setVisited();
+				} else {
+					curr = new Cell('0', true);
+					tape.addFirst(curr);
+				}
+
 			}
 		}
 		ListIterator<Cell> iterator = tape.listIterator();
 		String retVal = "";
-		while(iterator.hasNext()){
+		while (iterator.hasNext()) {
 			Cell c = iterator.next();
-			if(c.visited()){
+			if (printOnlyVisited) {
+				if (c.visited()) {
+					retVal += c.read();
+				}
+			} else {
 				retVal += c.read();
 			}
 		}
 		return retVal;
 	}
-	private void initTape(String input){
-		if(input.equals("")){
+
+	private void initTape(String input) {
+		if (input.equals("")) {
 			Cell cell = new Cell('0');
 			tape.add(cell);
 		}
-		for(char c : input.toCharArray()){
+		for (char c : input.toCharArray()) {
 			Cell cell = new Cell(c);
 			tape.addLast(cell);
 		}
 	}
+
 	public void addStartState(String state) {
 		startState = new TMState(state);
 		addState(state);
@@ -101,17 +105,17 @@ public class TM {
 		TMState stateToAdd = getState(fromState);
 		TMState nextState = getState(toState);
 		stateToAdd.addTransition(onSymb, nextState, writeSymbol, direction);
-		if(stateToAdd.getName().equals(startState.getName())){
+		if (stateToAdd.getName().equals(startState.getName())) {
 			startState = stateToAdd;
 		}
-		if(stateToAdd.getName().equals(haltingState.getName())){
+		if (stateToAdd.getName().equals(haltingState.getName())) {
 			haltingState = stateToAdd;
 		}
 	}
-	
-	private TMState getState(String state){
-		for(TMState st: states){
-			if(st.getName().equals(state)){
+
+	private TMState getState(String state) {
+		for (TMState st : states) {
+			if (st.getName().equals(state)) {
 				return st;
 			}
 		}

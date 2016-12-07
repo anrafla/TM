@@ -37,6 +37,8 @@ public class TMSimulator {
 				input = scan.next().trim();
 			}
 			System.out.println(tm.simulate(input));
+		} else {
+			System.out.println("Did not find file: " + fileName);
 		}
 	}
 

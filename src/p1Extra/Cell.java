@@ -6,11 +6,12 @@ public class Cell {
 
 	public Cell(char symbol) {
 		this.symbol = symbol;
+		visited = false;
 	}
 
 	public Cell(char symbol, boolean visited) {
 		this.symbol = symbol;
-		visited = false;
+		this.visited = visited;
 	}
 
 	public void setVisited() {
