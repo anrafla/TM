@@ -1,8 +1,7 @@
 package p1Extra;
 
-import java.util.ListIterator;
+import java.util.ArrayList;
 import java.util.HashSet;
-import java.util.LinkedList;
 import java.util.Set;
 
 public class TM {
@@ -10,7 +9,7 @@ public class TM {
 	private Set<TMState> states;
 	private Set<Character> alphabet;
 	private TMState startState, haltingState;
-	private LinkedList<Cell> tape;
+	private ArrayList<Cell> tape;
 
 	/**
 	 * Constructor
@@ -18,24 +17,25 @@ public class TM {
 	public TM() {
 		states = new HashSet<TMState>();
 		alphabet = new HashSet<Character>();
-		tape = new LinkedList<Cell>();
+		tape = new ArrayList<Cell>();
 	}
 
 	public String simulate(String input) {
 		initTape(input);
 		int tapeIndex = 0;
-		Cell curr = tape.getFirst();
+		int sum = 0;
+		Cell curr = tape.get(0);
 		curr.setVisited();
 		TMState currState = startState;
-		boolean printOnlyVisited = (input == "");
+		boolean printOnlyVisited = (input.equals(""));
 		// while the TM is running, i.e, when it is not in a halting state
 		while (!currState.getName().equals(haltingState.getName())) {
-			Transition temp = currState.getTransitionOn(curr.read());
+			Transition trans = currState.getTransitionOn(curr.read());
 			// update which state it is in
-			currState = temp.getNextState();
+			currState = trans.getNextState();
 			// update the tape, and mark cell as visited, then update the list
-			curr.write(temp.getWriteSymbol());
-			if (temp.getDirection() == 'R') {
+			curr.write(trans.getWriteSymbol());
+			if (trans.getDirection() == 'R' || trans.getDirection() == 'r') {
 				// making sure we dont go out of index exception: tape is
 				// bi-infinite
 				if (tapeIndex < tape.size() - 1) {
@@ -43,7 +43,7 @@ public class TM {
 					curr.setVisited();
 				} else {
 					curr = new Cell('0', true);
-					tape.addLast(curr);
+					tape.add(tape.size(), curr);
 					tapeIndex++;
 				}
 			} else {
@@ -52,23 +52,23 @@ public class TM {
 					curr.setVisited();
 				} else {
 					curr = new Cell('0', true);
-					tape.addFirst(curr);
+					tape.add(0, curr);
 				}
 
 			}
 		}
-		ListIterator<Cell> iterator = tape.listIterator();
 		String retVal = "";
-		while (iterator.hasNext()) {
-			Cell c = iterator.next();
+		for (int i = 0; i < tape.size(); i++) {
+			Cell temp = tape.get(i);
+			sum += Character.getNumericValue(temp.read());
 			if (printOnlyVisited) {
-				if (c.visited()) {
-					retVal += c.read();
+				if (temp.visited()) {
+					retVal += temp.read();
 				}
-			} else {
-				retVal += c.read();
-			}
+			} else
+				retVal+= temp.read();
 		}
+		System.out.println("Sum: " + sum);
 		return retVal;
 	}
 
@@ -79,7 +79,7 @@ public class TM {
 		}
 		for (char c : input.toCharArray()) {
 			Cell cell = new Cell(c);
-			tape.addLast(cell);
+			tape.add(tape.size(), cell);
 		}
 	}
 
