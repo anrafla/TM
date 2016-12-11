@@ -1,21 +1,22 @@
 package p1Extra;
 
 /**
- * @author andrew Creates a transition object, to contain fromState, nextState,
- *         and Symbol
- *
+ * @author andrew joshua Creates a transition object, to contain read symbol,
+ *         nextState, writeSymbol, and tape head direction
  */
 public class Transition {
 	private TMState nextState;
 	private char direction, onSymb, writeSymbol;
 
 	/**
-	 * @param fromState
-	 *            fromState
-	 * @param symbol
-	 *            Transition symbol
+	 * @param onSymb
+	 *            read symbol
 	 * @param nextState
-	 *            nextState
+	 *            reference to next state
+	 * @param writeSymbol
+	 *            write symbol
+	 * @param direction
+	 *            direction to move tape head ('L' or 'R')
 	 */
 	public Transition(char onSymb, TMState nextState, char writeSymbol, char direction) {
 		this.nextState = nextState;
@@ -23,22 +24,43 @@ public class Transition {
 		this.direction = direction;
 		this.onSymb = onSymb;
 	}
-	public char getOnSymb(){
+
+	/**
+	 * @return symbol the transition reads
+	 */
+	public char getOnSymb() {
 		return onSymb;
 	}
-	public TMState getNextState(){
+
+	/**
+	 * @return reference to next TMState object
+	 */
+	public TMState getNextState() {
 		return nextState;
 	}
-	public char getWriteSymbol(){
+
+	/**
+	 * @return symbol to write to the tape on this transition
+	 */
+	public char getWriteSymbol() {
 		return writeSymbol;
 	}
-	public char getDirection(){
+
+	/**
+	 * @return direction to move tape head (should be either 'L' or 'R' if
+	 *         transition was created correctly
+	 */
+	public char getDirection() {
 		return direction;
 	}
-	
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see java.lang.Object#toString()
+	 */
 	public String toString() {
-		String str = "\nOn: " + onSymb + "\nGoes to: " + nextState + "\nWrites: "
-				+ writeSymbol + "\nGoes: " + direction;
+		String str = "On: " + onSymb + "\nGoes to: " + nextState + "\nWrites: " + writeSymbol + "\nGoes: " + direction;
 		return str;
 
 	}
